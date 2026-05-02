@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+public class Main {
+public static void main(String[] args) {
+    RemoteDoctor doctor = new RemoteDoctor("Dr. Rimas", 9001, "General Medicine");
+    Nurse nurse = new Nurse("Shaden", 5001);
+
+    MobileClinic clinic = new MobileClinic("Mobile Clinic 01", nurse, doctor);
+
+    Patient p1 = new Patient("Maram", 2001);
+    Patient p2 = new Patient("Aryaf", 2002);
+
+    nurse.takeVitalSigns(p1, "High blood pressure. Follow-up recommended.");
+    nurse.takeVitalSigns(p2, "Normal check-up. No issues.");
+
+    clinic.addPatient(p1);
+    clinic.addPatient(p2);
+
+    Visit visit = new Visit("Al-Rawda Village", "2025-11-22");
+
+    
+    ArrayList<Person> teamAndPatients = new ArrayList<>();
+    teamAndPatients.add(doctor);
+    teamAndPatients.add(nurse);
+    teamAndPatients.add(p1);
+    teamAndPatients.add(p2);
+    
+    
+    for (int i = 0; i < teamAndPatients.size(); i++) {
+        teamAndPatients.get(i).displayInfo();
+    }
+
+
+    visit.showVisitDetails();
+    System.out.println("--------------------------------");
+    clinic.showClinicDetails();
+    System.out.println("--------------------------------");
+
+    doctor.consultPatient(p1);
+    doctor.consultPatient(p2);
+}
+}
