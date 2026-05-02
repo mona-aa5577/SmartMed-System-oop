@@ -1,0 +1,13 @@
+class Visit {
+    private String villageName;
+    private String date;
+
+    public Visit(String villageName, String date) {
+        this.villageName = villageName;
+        this.date = date;
+    }
+
+    public void showVisitDetails() {
+        System.out.println("Visit to village: " + villageName + " on " + date);
+    }
+}
