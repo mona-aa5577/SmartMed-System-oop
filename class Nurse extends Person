@@ -1,0 +1,16 @@
+class Nurse extends Person {
+
+    public Nurse(String name, int id) {
+        super(name, id);
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Nurse: " + name + " | ID: " + id);
+    }
+
+    public void takeVitalSigns(Patient patient, String notes) {
+        System.out.println("Nurse " + name + " is taking vital signs for: " + patient.name);
+        patient.getRecord().updateNotes(notes);
+    }
+}
