@@ -1,0 +1,16 @@
+class MedicalRecord {
+    private Patient patient;
+    private String notes = "No medical history yet.";
+
+    public MedicalRecord(Patient patient) {
+        this.patient = patient;
+    }
+
+    public void updateNotes(String newNotes) {
+        this.notes = newNotes;
+    }
+
+    public void showRecord() {
+        System.out.println("Medical Record for " + patient.name + ": " + notes);
+    }
+}
