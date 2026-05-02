@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+
+class MobileClinic {
+    private String clinicName;
+    private Nurse nurse;
+    private RemoteDoctor doctor;
+    private ArrayList<Patient> patients = new ArrayList<>();
+
+    public MobileClinic(String clinicName, Nurse nurse, RemoteDoctor doctor) {
+        this.clinicName = clinicName;
+        this.nurse = nurse;
+        this.doctor = doctor;
+    }
+
+    public void addPatient(Patient patient) {
+        patients.add(patient);
+    }
+
+    public void showClinicDetails() {
+        System.out.println("=== Mobile Health Clinic ===");
+        System.out.println("Clinic Name: " + clinicName);
+
+        System.out.print("Nurse on Duty: ");
+        nurse.displayInfo();
+
+        System.out.print("Remote Doctor: ");
+        doctor.displayInfo();
+
+        System.out.println("\nPatients Today:");
+        for (Patient p : patients) {
+            p.displayInfo();
+        }
+    }
+}
