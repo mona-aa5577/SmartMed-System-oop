@@ -1,0 +1,17 @@
+class RemoteDoctor extends Person {
+    private String specialty;
+
+    public RemoteDoctor(String name, int id, String specialty) {
+        super(name, id);
+        this.specialty = specialty;
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Remote Doctor: " + name + " | Specialty: " + specialty);
+    }
+
+    public void consultPatient(Patient patient) {
+        System.out.println("Doctor " + name + " is consulting patient " + patient.name + " remotely...");
+    }
+}
