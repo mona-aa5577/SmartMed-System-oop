@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Medication - منصة الحلول الذكية</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #2d0b21); 
+            color: white;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container { width: 100%; max-width: 600px; }
+
+        h1 {
+            text-align: center;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ff69b4;
+            padding-bottom: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 { color: #ff69b4; font-size: 1.1rem; margin-top: 0; border-right: 3px solid #ff69b4; padding-right: 10px; }
+        
+        .info-row { display: flex; justify-content: strt; gap: 15px; margin: 10px 0; font-size: 0.9rem}
+        .label { color: #bbb; }
+        .value { font-weight: bold; }
+
+        .status-online { color: #00ff00; }
+        .alert-box {
+            background: rgba(255, 77, 77, 0.2);
+            border: 1px solid #ff4d4d;
+            color: #ffcccc;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff69b4;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #ff1493; }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background: #222;
+            color: white;
+            box-sizing: border-box;
+        }
+        .system-monitor {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #00ff00;
+    animation: pulse-green 1.5s infinite;
+}
+@keyframes pulse-green {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="system-monitor">
+    <span><span class="dot"></span> System: Active</span>
+    <span style="color: #ff69b4;">|</span>
+    <span>Encryption: AES-256</span>
+    <span style="color: #ff69b4;">|</span>
+    <span id="currentTime"></span>
+</div>
+        <h1>منصة الحلول الذكية - رؤية 2030</h1>
+        
+        <div class="card">
+            <h2>👤 بيانات المريض</h2>
+            <div class="info-row"><span class="label">الاسم:</span> <span class="value">سارة</span></div>
+            <div class="info-row"><span class="label">رقم الهوية:</span> <span class="value">P101</span></div>
+        </div>
+
+        <div class="card">
+            <h2>📦 حالة SmartBox</h2>
+            <div class="info-row"><span class="label">الحالة:</span> <span class="value status-online">Online</span></div>
+            <div class="info-row"><span class="label">البطارية:</span> <span class="value">100%</span></div>
+        </div>
+
+        <div class="alert-box" id="alertMsg">
+            ⚠️ تنبيه: موعد جرعة Paracetamol الآن
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h2>👨‍⚕️ إضافة وصفة طبية</h2>
+            <input type="text" id="medName" placeholder="اسم الدواء الجديد...">
+            <button onclick="updateMed()">تحديث التنبيه</button>
+        </div>
+        <div id="medicineList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+    <p style="font-size: 0.8rem; color: #ff69b4; margin-bottom: 5px;">💊 قائمة الأدوية النشطة:</p>
+    </div>
+    </div>
+
+    <script>
+        function updateMed() {
+    var name = document.getElementById('medName').value;
+    if(name) {
+        // 1. تحديث التنبيه العلوي (SmartAlert)
+        document.getElementById('alertMsg').innerHTML = "⚠️ تنبيه: موعد جرعة " + name + " الآن";
+        
+        // 2. إضافة الدواء لقائمة الأدوية (Prescription List)
+        var list = document.getElementById('medicineList');
+        var item = document.createElement('div');
+        item.style.cssText = "background: rgba(255,105,180,0.1); padding: 10px; border-radius: 8px; border-right: 4px solid #ff69b4; font-size: 0.9rem;";
+        item.innerHTML = "💊 تم إضافة دواء جديد: " + name;
+        list.appendChild(item);
+
+        // مسح الخانة بعد الإضافة
+        document.getElementById('medName').value = "";
+    }
+}
+setInterval(() => {
+    const now = new Date();
+    document.getElementById('currentTime').innerText = now.toLocaleTimeString('ar-SA');
+}, 1000);
+
+        
+    </script>
+
+</body>
+</html>
